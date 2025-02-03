@@ -16,10 +16,11 @@
 
         .quiz-container {
             width: 100%;
-            max-width: 800px;
+            max-width: calc(100% - 8cm); /* 4cm margin on each side */
             background: white;
             padding: 20px;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            margin: 2cm 4cm;
         }
 
         .quiz-container h2 {
@@ -56,6 +57,22 @@
 
         button:hover {
             background-color: #3a3a4f;
+        }
+
+        /* Share button style */
+        .share-button {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            display: block;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .share-button:hover {
+            background-color: #218838;
         }
     </style>
 </head>
@@ -131,6 +148,9 @@
             <button type="button" onclick="addQuestion('fill_blank')">Add Fill in the Blank Question</button>
             <button type="submit">Submit Answers</button>
         </form>
+
+        <!-- Share button -->
+        <button class="share-button" onclick="shareForm()">Share This Quiz</button>
     </div>
 
     <script>
@@ -164,6 +184,11 @@
             
             newQuestion.innerHTML = questionHTML;
             container.appendChild(newQuestion);
+        }
+
+        function shareForm() {
+            // Placeholder for sharing functionality
+            alert("Share functionality is not implemented in this example.");
         }
     </script>
 </body>
