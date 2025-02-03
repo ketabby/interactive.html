@@ -81,63 +81,7 @@
         <h2>Interactive Quiz</h2>
         <form id="quizForm">
             <div id="questions-container">
-                <!-- True/False Question -->
-                <div class="form-group">
-                    <label contenteditable="true">1. The sky is blue. (True/False)</label>
-                    <select name="q1">
-                        <option value="true">True</option>
-                        <option value="false">False</option>
-                    </select>
-                </div>
-
-                <!-- Multiple Choice Question -->
-                <div class="form-group">
-                    <label contenteditable="true">2. What is the capital of France?</label>
-                    <select name="q2">
-                        <option value="paris">Paris</option>
-                        <option value="london">London</option>
-                        <option value="rome">Rome</option>
-                    </select>
-                </div>
-
-                <!-- Matching (Dropdowns) -->
-                <div class="form-group">
-                    <label contenteditable="true">3. Match the country to its continent:</label>
-                    <label contenteditable="true">USA</label>
-                    <select name="q3">
-                        <option value="asia">Asia</option>
-                        <option value="europe">Europe</option>
-                        <option value="north_america">North America</option>
-                    </select>
-                </div>
-
-                <!-- Short Answer -->
-                <div class="form-group">
-                    <label contenteditable="true">4. Who wrote "Romeo and Juliet"?</label>
-                    <input type="text" name="q4">
-                </div>
-
-                <!-- Long Answer -->
-                <div class="form-group">
-                    <label contenteditable="true">5. Explain the importance of photosynthesis.</label>
-                    <textarea name="q5" rows="4"></textarea>
-                </div>
-
-                <!-- Ordering Question -->
-                <div class="form-group">
-                    <label contenteditable="true">6. Arrange the planets in order from the Sun:</label>
-                    <ol>
-                        <li><input type="text" name="q6_1" placeholder="1st Planet"></li>
-                        <li><input type="text" name="q6_2" placeholder="2nd Planet"></li>
-                        <li><input type="text" name="q6_3" placeholder="3rd Planet"></li>
-                        <li><input type="text" name="q6_4" placeholder="4th Planet"></li>
-                    </ol>
-                </div>
-
-                <!-- Fill in the Blank -->
-                <div class="form-group">
-                    <label contenteditable="true">7. The largest ocean on Earth is the <input type="text" name="q7">.</label>
-                </div>
+                <!-- Questions will be dynamically added here -->
             </div>
             <button type="button" onclick="addQuestion('true_false')">Add True/False Question</button>
             <button type="button" onclick="addQuestion('multiple_choice')">Add Multiple Choice Question</button>
@@ -149,11 +93,17 @@
             <button type="submit">Submit Answers</button>
         </form>
 
-        <!-- Share button -->
-        <button class="share-button" onclick="shareForm()">Share This Quiz</button>
+        <!-- Share Form -->
+        <form id="shareForm" action="send_quiz.php" method="post">
+            <input type="email" name="email" placeholder="Enter recipient email" required>
+            <input type="hidden" name="quiz_url" value="">
+            <button type="submit" class="share-button">Send Quiz</button>
+        </form>
     </div>
 
     <script>
+        document.querySelector("input[name='quiz_url']").value = window.location.href;
+
         function addQuestion(type) {
             let container = document.getElementById('questions-container');
             let newQuestion = document.createElement('div');
@@ -184,11 +134,6 @@
             
             newQuestion.innerHTML = questionHTML;
             container.appendChild(newQuestion);
-        }
-
-        function shareForm() {
-            // Placeholder for sharing functionality
-            alert("Share functionality is not implemented in this example.");
         }
     </script>
 </body>
