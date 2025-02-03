@@ -124,7 +124,7 @@
 
     <div class="main-container">
         <div class="sidebar">
-            <div>Section 1</div>
+            <div id="learner-responses">📩 Learner Responses</div>
             <div>Section 2</div>
             <div>Section 3</div>
             <div>Section 4</div>
@@ -134,7 +134,7 @@
 
         <div class="quiz-container">
             <h2>Interactive Quiz</h2>
-            <form id="quizForm">
+            <form id="quizForm" action="send_quiz.php" method="POST">
                 <div id="questions-container">
                     <!-- Questions will be dynamically added here -->
                 </div>
@@ -149,7 +149,7 @@
             </form>
 
             <!-- Share Form -->
-            <form id="shareForm" action="send_quiz.php" method="post">
+            <form id="shareForm" action="send_quiz.php" method="POST">
                 <label for="class">Select Recipient Class:</label>
                 <select name="class" id="class">
                     <option value="class1">Class 1</option>
@@ -173,6 +173,19 @@
 
     <script>
         document.querySelector("input[name='quiz_url']").value = window.location.href;
+
+        function activateLearnerResponses() {
+            const learnerResponsesIcon = document.getElementById('learner-responses');
+            learnerResponsesIcon.style.backgroundColor = '#28a745';  // Change background color to green (indicating activity)
+            learnerResponsesIcon.innerText = '📩 Learner Responses (New)';
+        }
+
+        // Handle form submission
+        document.querySelector('form#quizForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission for demo purposes
+            activateLearnerResponses();  // Activate icon when quiz is submitted
+            this.submit();  // Actually submit the form after the icon is activated
+        });
 
         function addQuestion(type) {
             let container = document.getElementById('questions-container');
