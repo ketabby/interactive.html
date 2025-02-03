@@ -168,6 +168,38 @@
 
     <script>
         document.querySelector("input[name='quiz_url']").value = window.location.href;
+
+        function addQuestion(type) {
+            let container = document.getElementById('questions-container');
+            let newQuestion = document.createElement('div');
+            newQuestion.classList.add('form-group');
+            
+            let questionHTML = '';
+            if (type === 'true_false') {
+                questionHTML = `<label>New True/False Question</label>
+                <select><option value="true">True</option><option value="false">False</option></select>`;
+            } else if (type === 'multiple_choice') {
+                questionHTML = `<label>New Multiple Choice Question</label>
+                <select><option>Option 1</option><option>Option 2</option><option>Option 3</option></select>`;
+            } else if (type === 'matching') {
+                questionHTML = `<label>New Matching Question</label>
+                <input type="text" placeholder="Item"><select><option>Match 1</option><option>Match 2</option></select>`;
+            } else if (type === 'short_answer') {
+                questionHTML = `<label>New Short Answer Question</label>
+                <input type="text">`;
+            } else if (type === 'long_answer') {
+                questionHTML = `<label>New Long Answer Question</label>
+                <textarea rows="4"></textarea>`;
+            } else if (type === 'ordering') {
+                questionHTML = `<label>New Ordering Question</label>
+                <ol><li><input type="text"></li><li><input type="text"></li></ol>`;
+            } else if (type === 'fill_blank') {
+                questionHTML = `<label>New Fill in the Blank Question: <input type="text"></label>`;
+            }
+            
+            newQuestion.innerHTML = questionHTML;
+            container.appendChild(newQuestion);
+        }
     </script>
 </body>
 </html>
