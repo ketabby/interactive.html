@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #add8e6; /* Light blue */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .quiz-container {
+            width: 100%;
+            max-width: 800px;
+            background: white;
+            padding: 20px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .quiz-container h2 {
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #ffcccc; /* Light red */
+        }
+
+        button {
+            background-color: #1f1f2e;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            display: block;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #3a3a4f;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h2>Interactive Quiz</h2>
+        <form id="quizForm">
+            <div id="questions-container">
+                <!-- True/False Question -->
+                <div class="form-group">
+                    <label contenteditable="true">1. The sky is blue. (True/False)</label>
+                    <select name="q1">
+                        <option value="true">True</option>
+                        <option value="false">False</option>
+                    </select>
+                </div>
+
+                <!-- Multiple Choice Question -->
+                <div class="form-group">
+                    <label contenteditable="true">2. What is the capital of France?</label>
+                    <select name="q2">
+                        <option value="paris">Paris</option>
+                        <option value="london">London</option>
+                        <option value="rome">Rome</option>
+                    </select>
+                </div>
+
+                <!-- Matching (Dropdowns) -->
+                <div class="form-group">
+                    <label contenteditable="true">3. Match the country to its continent:</label>
+                    <label contenteditable="true">USA</label>
+                    <select name="q3">
+                        <option value="asia">Asia</option>
+                        <option value="europe">Europe</option>
+                        <option value="north_america">North America</option>
+                    </select>
+                </div>
+
+                <!-- Short Answer -->
+                <div class="form-group">
+                    <label contenteditable="true">4. Who wrote "Romeo and Juliet"?</label>
+                    <input type="text" name="q4">
+                </div>
+
+                <!-- Long Answer -->
+                <div class="form-group">
+                    <label contenteditable="true">5. Explain the importance of photosynthesis.</label>
+                    <textarea name="q5" rows="4"></textarea>
+                </div>
+
+                <!-- Ordering Question -->
+                <div class="form-group">
+                    <label contenteditable="true">6. Arrange the planets in order from the Sun:</label>
+                    <ol>
+                        <li><input type="text" name="q6_1" placeholder="1st Planet"></li>
+                        <li><input type="text" name="q6_2" placeholder="2nd Planet"></li>
+                        <li><input type="text" name="q6_3" placeholder="3rd Planet"></li>
+                        <li><input type="text" name="q6_4" placeholder="4th Planet"></li>
+                    </ol>
+                </div>
+
+                <!-- Fill in the Blank -->
+                <div class="form-group">
+                    <label contenteditable="true">7. The largest ocean on Earth is the <input type="text" name="q7">.</label>
+                </div>
+            </div>
+            <button type="button" onclick="addQuestion('true_false')">Add True/False Question</button>
+            <button type="button" onclick="addQuestion('multiple_choice')">Add Multiple Choice Question</button>
+            <button type="button" onclick="addQuestion('matching')">Add Matching Question</button>
+            <button type="button" onclick="addQuestion('short_answer')">Add Short Answer Question</button>
+            <button type="button" onclick="addQuestion('long_answer')">Add Long Answer Question</button>
+            <button type="button" onclick="addQuestion('ordering')">Add Ordering Question</button>
+            <button type="button" onclick="addQuestion('fill_blank')">Add Fill in the Blank Question</button>
+            <button type="submit">Submit Answers</button>
+        </form>
+    </div>
+
+    <script>
+        function addQuestion(type) {
+            let container = document.getElementById('questions-container');
+            let newQuestion = document.createElement('div');
+            newQuestion.classList.add('form-group');
+            
+            let questionHTML = '';
+            if (type === 'true_false') {
+                questionHTML = `<label contenteditable="true">New True/False Question</label>
+                <select><option value="true">True</option><option value="false">False</option></select>`;
+            } else if (type === 'multiple_choice') {
+                questionHTML = `<label contenteditable="true">New Multiple Choice Question</label>
+                <select><option>Option 1</option><option>Option 2</option><option>Option 3</option></select>`;
+            } else if (type === 'matching') {
+                questionHTML = `<label contenteditable="true">New Matching Question</label>
+                <input type="text" placeholder="Item"><select><option>Match 1</option><option>Match 2</option></select>`;
+            } else if (type === 'short_answer') {
+                questionHTML = `<label contenteditable="true">New Short Answer Question</label>
+                <input type="text">`;
+            } else if (type === 'long_answer') {
+                questionHTML = `<label contenteditable="true">New Long Answer Question</label>
+                <textarea rows="4"></textarea>`;
+            } else if (type === 'ordering') {
+                questionHTML = `<label contenteditable="true">New Ordering Question</label>
+                <ol><li><input type="text"></li><li><input type="text"></li></ol>`;
+            } else if (type === 'fill_blank') {
+                questionHTML = `<label contenteditable="true">New Fill in the Blank Question: <input type="text"></label>`;
+            }
+            
+            newQuestion.innerHTML = questionHTML;
+            container.appendChild(newQuestion);
+        }
+    </script>
+</body>
+</html>
