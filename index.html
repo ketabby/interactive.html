@@ -150,7 +150,12 @@
 
             <!-- Share Form -->
             <form id="shareForm" action="send_quiz.php" method="post">
-                <input type="email" name="email" placeholder="Enter recipient email" required>
+                <label for="class">Select Recipient Class:</label>
+                <select name="class" id="class">
+                    <option value="class1">Class 1</option>
+                    <option value="class2">Class 2</option>
+                    <option value="class3">Class 3</option>
+                </select>
                 <input type="hidden" name="quiz_url" value="">
                 <button type="submit" class="share-button">Send Quiz</button>
             </form>
@@ -190,13 +195,7 @@
             } else if (type === 'long_answer') {
                 questionHTML = `<label>New Long Answer Question</label>
                 <textarea rows="4"></textarea>`;
-            } else if (type === 'ordering') {
-                questionHTML = `<label>New Ordering Question</label>
-                <ol><li><input type="text"></li><li><input type="text"></li></ol>`;
-            } else if (type === 'fill_blank') {
-                questionHTML = `<label>New Fill in the Blank Question: <input type="text"></label>`;
-            }
-            
+            } 
             newQuestion.innerHTML = questionHTML;
             container.appendChild(newQuestion);
         }
