@@ -149,7 +149,7 @@
             </form>
 
             <!-- Share Form -->
-            <form id="shareForm" action="test_post.php" method="POST">
+            <form id="shareForm" action="send_quiz.php" method="POST">
                 <label for="class">Select Recipient Class:</label>
                 <select name="class" id="class">
                     <option value="class1">Class 1</option>
@@ -184,27 +184,7 @@
         document.querySelector('form#quizForm').addEventListener('submit', function(event) {
             event.preventDefault(); // Prevent form submission for demo purposes
             activateLearnerResponses();  // Activate icon when quiz is submitted
-
-            // Submit the form using AJAX to avoid 405 error
-            const form = event.target;
-            const formData = new FormData(form);
-
-            fetch(form.action, {
-                method: form.method,
-                body: formData
-            })
-            .then(response => {
-                if (response.ok) {
-                    // Redirect to the specified URL on success
-                    window.location.href = 'https://ketabby.github.io/index22.html/#courses';
-                } else {
-                    alert('There was a problem submitting the quiz.');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('There was a problem submitting the quiz.');
-            });
+            this.submit();  // Actually submit the form after the icon is activated
         });
 
         function addQuestion(type) {
@@ -214,20 +194,44 @@
             
             let questionHTML = '';
             if (type === 'true_false') {
-                questionHTML = `<label>New True/False Question</label>
-                <select><option value="true">True</option><option value="false">False</option></select>`;
+                questionHTML = `
+                    <label>New True/False Question</label>
+                    <input type="text" value="True/False Question" class="editable-question">
+                    <select>
+                        <option value="true">True</option>
+                        <option value="false">False</option>
+                    </select>
+                `;
             } else if (type === 'multiple_choice') {
-                questionHTML = `<label>New Multiple Choice Question</label>
-                <select><option>Option 1</option><option>Option 2</option><option>Option 3</option></select>`;
+                questionHTML = `
+                    <label>New Multiple Choice Question</label>
+                    <input type="text" value="Multiple Choice Question" class="editable-question">
+                    <select>
+                        <option>Option 1</option>
+                        <option>Option 2</option>
+                        <option>Option 3</option>
+                    </select>
+                `;
             } else if (type === 'matching') {
-                questionHTML = `<label>New Matching Question</label>
-                <input type="text" placeholder="Item"><select><option>Match 1</option><option>Match 2</option></select>`;
+                questionHTML = `
+                    <label>New Matching Question</label>
+                    <input type="text" value="Matching Question" class="editable-question">
+                    <input type="text" placeholder="Item">
+                    <select>
+                        <option>Match 1</option>
+                        <option>Match 2</option>
+                    </select>
+                `;
             } else if (type === 'short_answer') {
-                questionHTML = `<label>New Short Answer Question</label>
-                <input type="text">`;
+                questionHTML = `
+                    <label>New Short Answer Question</label>
+                    <input type="text" value="Short Answer Question" class="editable-question">
+                `;
             } else if (type === 'long_answer') {
-                questionHTML = `<label>New Long Answer Question</label>
-                <textarea rows="4"></textarea>`;
+                questionHTML = `
+                    <label>New Long Answer Question</label>
+                    <textarea rows="4">Long Answer Question</textarea>
+                `;
             } 
             newQuestion.innerHTML = questionHTML;
             container.appendChild(newQuestion);
