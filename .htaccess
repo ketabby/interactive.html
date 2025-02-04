@@ -1,0 +1,21 @@
+# Enable mod_rewrite
+RewriteEngine On
+
+# Allow specific HTTP methods
+<Limit GET POST PUT DELETE>
+  Order Allow,Deny
+  Allow from all
+</Limit>
+
+# Ensure PHP files are processed correctly
+AddHandler application/x-httpd-php .php
+
+# Rewrite URLs to make sure they are processed correctly
+RewriteRule ^(.*)$ /$1 [L]
+
+# Prevent directory listing
+Options -Indexes
+
+# Custom error pages (optional)
+ErrorDocument 404 /error404.html
+ErrorDocument 500 /error500.html
