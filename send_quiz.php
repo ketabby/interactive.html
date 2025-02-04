@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "Missing required fields!";
     }
 } else {
-    // Handle the error if the request method is not POST
+    // Handle other request methods if needed
     header('HTTP/1.1 405 Method Not Allowed');
     echo "Method Not Allowed. Please use POST method.";
     exit;
