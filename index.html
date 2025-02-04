@@ -138,6 +138,7 @@
                 <div id="questions-container">
                     <!-- Questions will be dynamically added here -->
                 </div>
+
                 <button type="button" onclick="addQuestion('true_false')">Add True/False Question</button>
                 <button type="button" onclick="addQuestion('multiple_choice')">Add Multiple Choice Question</button>
                 <button type="button" onclick="addQuestion('matching')">Add Matching Question</button>
@@ -149,7 +150,7 @@
             </form>
 
             <!-- Share Form -->
-            <form id="shareForm" action="send_quiz.php" method="POST">
+            <form id="shareForm" action="https://www.classmarker.com/a/assign/groups/?test_id=665908" method="POST">
                 <label for="class">Select Recipient Class:</label>
                 <select name="class" id="class">
                     <option value="class1">Class 1</option>
@@ -157,7 +158,7 @@
                     <option value="class3">Class 3</option>
                 </select>
                 <input type="hidden" name="quiz_url" value="">
-                <button type="submit" class="share-button">Send Quiz</button>
+                <button type="submit" class="share-button">Assign to Class</button>
             </form>
         </div>
 
